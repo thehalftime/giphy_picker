@@ -1,6 +1,7 @@
 export 'client/client.dart';
 export 'client/collection.dart';
 export 'client/gif.dart';
+export 'client/giphy_resource_type.dart';
 export 'client/image.dart';
 export 'client/images.dart';
 export 'client/languages.dart';

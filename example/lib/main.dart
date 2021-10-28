@@ -44,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // request your Giphy API key at https://developers.giphy.com/
           final gif = await GiphyPicker.pickGif(
             context: context,
-            apiKey: '[YOUR GIPHY APIKEY]',
+            resourceType: GiphyResourceType.clip,
+            apiKey: '9ASz9KDZJ9h4FEhXsO71NDJKc9sM3oax',
             fullScreenDialog: false,
             previewType: GiphyPreviewType.previewWebp,
             decorator: GiphyDecorator(
