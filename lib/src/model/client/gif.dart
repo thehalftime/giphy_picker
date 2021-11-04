@@ -1,4 +1,5 @@
 import 'package:giphy_picker/src/model/client/images.dart';
+import 'package:giphy_picker/src/model/client/video.dart';
 import 'package:giphy_picker/src/model/client/user.dart';
 
 class GiphyGif {
@@ -21,6 +22,7 @@ class GiphyGif {
   final DateTime? trendingDatetime;
   final GiphyUser user;
   final GiphyImages images;
+  final GiphyVideo? video;
 
   GiphyGif(
       {this.title,
@@ -41,7 +43,8 @@ class GiphyGif {
       this.importDatetime,
       this.trendingDatetime,
       GiphyUser? user,
-      GiphyImages? images})
+      GiphyImages? images,
+      this.video})
       : this.user = user ?? GiphyUser(),
         this.images = images ?? GiphyImages();
 
@@ -72,7 +75,10 @@ class GiphyGif {
           : GiphyUser.fromJson(json['user'] as Map<String, dynamic>),
       images: json['images'] == null
           ? null
-          : GiphyImages.fromJson(json['images'] as Map<String, dynamic>));
+          : GiphyImages.fromJson(json['images'] as Map<String, dynamic>),
+      video: json['video'] == null
+          ? null
+          : GiphyVideo.fromJson(json['video'] as Map<String, dynamic>));
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -94,13 +100,14 @@ class GiphyGif {
       'import_datetime': importDatetime?.toIso8601String(),
       'trending_datetime': trendingDatetime?.toIso8601String(),
       'user': user,
-      'images': images
+      'images': images,
+      'video': video,
     };
   }
 
   @override
   String toString() {
-    return 'GiphyGif{title: $title, type: $type, id: $id, slug: $slug, url: $url, bitlyGifUrl: $bitlyGifUrl, bitlyUrl: $bitlyUrl, embedUrl: $embedUrl, username: $username, source: $source, rating: $rating, contentUrl: $contentUrl, sourceTld: $sourceTld, sourcePostUrl: $sourcePostUrl, isSticker: $isSticker, importDatetime: $importDatetime, trendingDatetime: $trendingDatetime, user: $user, images: $images}';
+    return 'GiphyGif{title: $title, type: $type, id: $id, slug: $slug, url: $url, bitlyGifUrl: $bitlyGifUrl, bitlyUrl: $bitlyUrl, embedUrl: $embedUrl, username: $username, source: $source, rating: $rating, contentUrl: $contentUrl, sourceTld: $sourceTld, sourcePostUrl: $sourcePostUrl, isSticker: $isSticker, importDatetime: $importDatetime, trendingDatetime: $trendingDatetime, user: $user, images: $images, video: $video}';
   }
 
   @override
@@ -126,7 +133,8 @@ class GiphyGif {
           importDatetime == other.importDatetime &&
           trendingDatetime == other.trendingDatetime &&
           user == other.user &&
-          images == other.images;
+          images == other.images &&
+          video == other.video;
 
   @override
   int get hashCode =>
@@ -148,5 +156,6 @@ class GiphyGif {
       importDatetime.hashCode ^
       trendingDatetime.hashCode ^
       user.hashCode ^
-      images.hashCode;
+      images.hashCode ^
+      video.hashCode;
 }
